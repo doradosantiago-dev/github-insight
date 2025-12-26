@@ -1,7 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { GithubService } from '../../core/services/github.service';
-import { LucideAngularModule, Search, Building2, MapPin, Mail, Link2, Calendar, AlertTriangle, X } from 'lucide-angular';
+import { LucideAngularModule, Search, Building2, MapPin, Mail, Link2, Calendar, AlertTriangle, X, Star, GitFork } from 'lucide-angular';
 
 /**
  * Componente de búsqueda de usuarios de GitHub.
@@ -23,6 +23,9 @@ export class SearchComponent {
     readonly CalendarIcon = Calendar;
     readonly AlertTriangleIcon = AlertTriangle;
     readonly XIcon = X;
+    readonly StarIcon = Star;
+    readonly GitForkIcon = GitFork;
+
     /**
      * Servicio de GitHub inyectado usando inject()
      * @private
@@ -56,6 +59,27 @@ export class SearchComponent {
      * @readonly
      */
     public readonly error = this.githubService.error;
+
+    /**
+     * Computed signal que expone los repositorios del usuario
+     * @public
+     * @readonly
+     */
+    public readonly repos = this.githubService.repos;
+
+    /**
+     * Computed signal que indica si se están cargando los repositorios
+     * @public
+     * @readonly
+     */
+    public readonly isLoadingRepos = this.githubService.isLoadingRepos;
+
+    /**
+     * Computed signal que expone el error de carga de repositorios
+     * @public
+     * @readonly
+     */
+    public readonly reposError = this.githubService.reposError;
 
     /**
      * Maneja el evento de búsqueda cuando el usuario presiona Enter.
@@ -92,5 +116,25 @@ export class SearchComponent {
             month: 'long',
             day: 'numeric'
         });
+    }
+
+    /**
+     * Formatea la fecha de actualización de un repositorio de forma relativa.
+     * 
+     * @param dateString - Fecha en formato ISO 8601
+     * @returns Fecha formateada de forma relativa ("hace X días")
+     */
+    public formatRelativeDate(dateString: string): string {
+        const date = new Date(dateString);
+        const now = new Date();
+        const diffInMs = now.getTime() - date.getTime();
+        const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+
+        if (diffInDays === 0) return 'hoy';
+        if (diffInDays === 1) return 'hace 1 día';
+        if (diffInDays < 7) return `hace ${diffInDays} días`;
+        if (diffInDays < 30) return `hace ${Math.floor(diffInDays / 7)} semanas`;
+        if (diffInDays < 365) return `hace ${Math.floor(diffInDays / 30)} meses`;
+        return `hace ${Math.floor(diffInDays / 365)} años`;
     }
 }

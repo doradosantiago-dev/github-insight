@@ -137,5 +137,71 @@
             </div>
         </div>
     </div>
+
+    <!-- Repositories Section -->
+    @defer (on timer(500ms)) {
+    <section class="repos-section">
+        <h2 class="repos-title">Repositorios Recientes</h2>
+
+        @if (isLoadingRepos()) {
+        <div class="repos-loading">
+            <div class="loading-spinner"></div>
+            <p class="loading-text">Cargando repositorios...</p>
+        </div>
+        } @else if (reposError()) {
+        <div class="repos-error">
+            <i-lucide [img]="AlertTriangleIcon" [size]="24"></i-lucide>
+            <p>{{ reposError() }}</p>
+        </div>
+        } @else if (repos()) {
+        <div class="repos-grid">
+            @for (repo of repos(); track repo.id) {
+            <article class="repo-card">
+                <div class="repo-header">
+                    <h3 class="repo-name">
+                        <a [href]="repo.html_url" target="_blank" rel="noopener noreferrer">
+                            {{ repo.name }}
+                        </a>
+                    </h3>
+                    @if (repo.language) {
+                    <span class="repo-language">{{ repo.language }}</span>
+                    }
+                </div>
+
+                @if (repo.description) {
+                <p class="repo-description">{{ repo.description }}</p>
+                }
+
+                <div class="repo-footer">
+                    <div class="repo-stats">
+                        <span class="repo-stat">
+                            <i-lucide [img]="StarIcon" [size]="14"></i-lucide>
+                            {{ repo.stargazers_count }}
+                        </span>
+                        <span class="repo-stat">
+                            <i-lucide [img]="GitForkIcon" [size]="14"></i-lucide>
+                            {{ repo.forks_count }}
+                        </span>
+                    </div>
+                    <span class="repo-updated">Actualizado {{ formatRelativeDate(repo.updated_at) }}</span>
+                </div>
+            </article>
+            } @empty {
+            <div class="repos-empty">
+                <p>Este usuario no tiene repositorios públicos</p>
+            </div>
+            }
+        </div>
+        }
+    </section>
+    } @placeholder {
+    <div class="repos-placeholder">
+        <p>Preparando repositorios...</p>
+    </div>
+    } @loading {
+    <div class="repos-loading-initial">
+        <div class="loading-spinner"></div>
+    </div>
+    }
     }
 </div>

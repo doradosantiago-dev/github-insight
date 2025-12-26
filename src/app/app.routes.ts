@@ -9,7 +9,7 @@ export const routes: Routes = [
     {
         path: '',
         loadComponent: () =>
-            import('./features/search/search.component').then(
+            import('./features/search/search.component.js').then(
                 (m) => m.SearchComponent
             ),
     },
