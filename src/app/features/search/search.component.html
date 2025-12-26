@@ -1,11 +1,23 @@
 <div class="search-container">
     <!-- Header -->
     <header class="search-header">
-        <h1 class="title">
-            <i-lucide [img]="SearchIcon" class="icon"></i-lucide>
-            GitHub User Search
-        </h1>
-        <p class="subtitle">Busca y explora perfiles de desarrolladores en GitHub</p>
+        <div class="header-content">
+            <h1 class="title">
+                <i-lucide [img]="SearchIcon" class="icon"></i-lucide>
+                GitHub User Search
+            </h1>
+            <p class="subtitle">Busca y explora perfiles de desarrolladores en GitHub</p>
+        </div>
+
+        <!-- Theme Toggle Button -->
+        <button class="theme-toggle" (click)="themeService.toggleTheme()" type="button" aria-label="Cambiar tema"
+            title="Cambiar tema">
+            @if (themeService.theme() === 'dark') {
+            <i-lucide [img]="SunIcon" [size]="20"></i-lucide>
+            } @else {
+            <i-lucide [img]="MoonIcon" [size]="20"></i-lucide>
+            }
+        </button>
     </header>
 
     <!-- Search Box -->

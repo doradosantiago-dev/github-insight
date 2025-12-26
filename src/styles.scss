@@ -1,6 +1,6 @@
 /**
  * Estilos globales de la aplicación
- * GitHub Dark Theme
+ * Sistema de temas: GitHub Dark y GitHub Light
  */
 
 /* Reset básico */
@@ -10,68 +10,177 @@
     box-sizing: border-box;
 }
 
-/* Variables globales del tema GitHub Dark - Profesional */
+/**
+ * Variables CSS para Dark Theme (por defecto)
+ * Basado en GitHub Dark Dimmed
+ */
 :root {
-    --gh-bg-primary: #0d1117;
-    --gh-bg-secondary: #161b22;
-    --gh-bg-tertiary: #21262d;
-    --gh-bg-hover: #1c2128;
-    --gh-border: #30363d;
-    --gh-border-subtle: #21262d;
-    --gh-text-primary: #e6edf3;
-    --gh-text-secondary: #7d8590;
-    --gh-text-tertiary: #6e7681;
-    --gh-text-link: #58a6ff;
-    --gh-text-link-hover: #79c0ff;
-    --gh-accent-emphasis: #1f6feb;
-    --gh-success: #238636;
-    --gh-success-hover: #2ea043;
-    --gh-error: #da3633;
-    --gh-error-hover: #f85149;
-    --gh-warning: #d29922;
-    --gh-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-    --gh-shadow-md: 0 3px 6px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.12);
-    --gh-shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-    --gh-shadow-xl: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    /* Colores de fondo */
+    --bg-primary: #0d1117;
+    --bg-secondary: #161b22;
+    --bg-tertiary: #21262d;
+    --bg-hover: #1c2128;
+    --card-bg: #161b22;
+
+    /* Bordes */
+    --border-color: #30363d;
+    --border-subtle: #21262d;
+
+    /* Textos */
+    --text-main: #e6edf3;
+    --text-muted: #7d8590;
+    --text-tertiary: #6e7681;
+
+    /* Acentos y enlaces */
+    --accent-color: #58a6ff;
+    --accent-hover: #79c0ff;
+    --accent-emphasis: #1f6feb;
+
+    /* Estados */
+    --success-color: #238636;
+    --success-hover: #2ea043;
+    --error-color: #da3633;
+    --error-hover: #f85149;
+    --warning-color: #d29922;
+
+    /* Sombras */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    --shadow-md: 0 3px 6px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.12);
+    --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    --shadow-xl: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+
+    /* Transiciones */
     --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
     --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
     --transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Variables legacy para compatibilidad */
+    --gh-bg-primary: var(--bg-primary);
+    --gh-bg-secondary: var(--bg-secondary);
+    --gh-bg-tertiary: var(--bg-tertiary);
+    --gh-bg-hover: var(--bg-hover);
+    --gh-border: var(--border-color);
+    --gh-border-subtle: var(--border-subtle);
+    --gh-text-primary: var(--text-main);
+    --gh-text-secondary: var(--text-muted);
+    --gh-text-tertiary: var(--text-tertiary);
+    --gh-text-link: var(--accent-color);
+    --gh-text-link-hover: var(--accent-hover);
+    --gh-accent-emphasis: var(--accent-emphasis);
+    --gh-success: var(--success-color);
+    --gh-success-hover: var(--success-hover);
+    --gh-error: var(--error-color);
+    --gh-error-hover: var(--error-hover);
+    --gh-warning: var(--warning-color);
+    --gh-shadow-sm: var(--shadow-sm);
+    --gh-shadow-md: var(--shadow-md);
+    --gh-shadow-lg: var(--shadow-lg);
+    --gh-shadow-xl: var(--shadow-xl);
 }
 
-/* Estilos base del body */
+/**
+ * Variables CSS para Light Theme
+ * Basado en GitHub Light
+ */
+[data-theme='light'] {
+    /* Colores de fondo */
+    --bg-primary: #f6f8fa;
+    --bg-secondary: #ffffff;
+    --bg-tertiary: #f6f8fa;
+    --bg-hover: #f3f4f6;
+    --card-bg: #ffffff;
+
+    /* Bordes */
+    --border-color: #d0d7de;
+    --border-subtle: #e4e9ef;
+
+    /* Textos */
+    --text-main: #1f2328;
+    --text-muted: #636c76;
+    --text-tertiary: #8c959f;
+
+    /* Acentos y enlaces */
+    --accent-color: #0969da;
+    --accent-hover: #0550ae;
+    --accent-emphasis: #0969da;
+
+    /* Estados */
+    --success-color: #1a7f37;
+    --success-hover: #26a641;
+    --error-color: #cf222e;
+    --error-hover: #a40e26;
+    --warning-color: #9a6700;
+
+    /* Sombras más sutiles para light mode */
+    --shadow-sm: 0 1px 3px rgba(27, 31, 35, 0.04), 0 0 0 1px rgba(27, 31, 35, 0.04);
+    --shadow-md: 0 3px 6px rgba(140, 149, 159, 0.15);
+    --shadow-lg: 0 8px 24px rgba(140, 149, 159, 0.2);
+    --shadow-xl: 0 12px 28px rgba(140, 149, 159, 0.25);
+
+    /* Variables legacy para compatibilidad */
+    --gh-bg-primary: var(--bg-primary);
+    --gh-bg-secondary: var(--bg-secondary);
+    --gh-bg-tertiary: var(--bg-tertiary);
+    --gh-bg-hover: var(--bg-hover);
+    --gh-border: var(--border-color);
+    --gh-border-subtle: var(--border-subtle);
+    --gh-text-primary: var(--text-main);
+    --gh-text-secondary: var(--text-muted);
+    --gh-text-tertiary: var(--text-tertiary);
+    --gh-text-link: var(--accent-color);
+    --gh-text-link-hover: var(--accent-hover);
+    --gh-accent-emphasis: var(--accent-emphasis);
+    --gh-success: var(--success-color);
+    --gh-success-hover: var(--success-hover);
+    --gh-error: var(--error-color);
+    --gh-error-hover: var(--error-hover);
+    --gh-warning: var(--warning-color);
+    --gh-shadow-sm: var(--shadow-sm);
+    --gh-shadow-md: var(--shadow-md);
+    --gh-shadow-lg: var(--shadow-lg);
+    --gh-shadow-xl: var(--shadow-xl);
+}
+
+/* Estilos base del body con transición suave entre temas */
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans',
         Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
-    background-color: var(--gh-bg-primary);
-    color: var(--gh-text-primary);
+    background-color: var(--bg-primary);
+    color: var(--text-main);
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    transition: background-color var(--transition-base), color var(--transition-base);
 }
 
-/* Scrollbar personalizado (Webkit) */
+/* Scrollbar personalizado (Webkit) con soporte para temas */
 ::-webkit-scrollbar {
     width: 10px;
     height: 10px;
 }
 
 ::-webkit-scrollbar-track {
-    background-color: var(--gh-bg-primary);
+    background-color: var(--bg-primary);
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: var(--gh-border);
+    background-color: var(--border-color);
     border-radius: 5px;
 
     &:hover {
-        background-color: var(--gh-text-secondary);
+        background-color: var(--text-muted);
     }
 }
 
-/* Estilos de selección de texto */
+/* Estilos de selección de texto con soporte para temas */
 ::selection {
     background-color: rgba(88, 166, 255, 0.3);
-    color: var(--gh-text-primary);
+    color: var(--text-main);
+}
+
+[data-theme='light'] ::selection {
+    background-color: rgba(9, 105, 218, 0.15);
+    color: var(--text-main);
 }
 
 /* Elementos de formulario heredan fuente del body */
@@ -81,4 +190,168 @@ select,
 button {
     font-family: inherit;
     font-size: inherit;
+}
+
+/**
+ * Estilos de tema para componentes (modo claro)
+ */
+[data-theme='light'] {
+    .search-input {
+        background-color: #ffffff;
+        border-color: #0969da;
+        color: #1f2328;
+
+        &::placeholder {
+            color: #8c959f;
+        }
+
+        &:hover:not(:disabled) {
+            border-color: #0550ae;
+            background-color: #ffffff;
+        }
+
+        &:focus {
+            border-color: #0550ae;
+            background-color: #ffffff;
+            box-shadow: 0 0 0 3px rgba(9, 105, 218, 0.12),
+                0 3px 6px rgba(140, 149, 159, 0.15);
+        }
+    }
+
+    .search-button {
+        background: linear-gradient(180deg, #0969da 0%, #0550ae 100%);
+        border: 1px solid rgba(27, 31, 36, 0.15);
+        color: #ffffff;
+        box-shadow: 0 1px 3px rgba(27, 31, 35, 0.12),
+            inset 0 1px 0 rgba(255, 255, 255, 0.15);
+
+        &::before {
+            background: linear-gradient(90deg,
+                    transparent,
+                    rgba(255, 255, 255, 0.25),
+                    transparent);
+        }
+
+        &:hover:not(:disabled) {
+            background: linear-gradient(180deg, #0860ca 0%, #044a99 100%);
+            box-shadow: 0 3px 6px rgba(9, 105, 218, 0.25),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2),
+                0 0 0 1px rgba(9, 105, 218, 0.4);
+        }
+
+        &:active:not(:disabled) {
+            background: linear-gradient(180deg, #0550ae 0%, #033d8b 100%);
+        }
+
+        &:disabled {
+            background: #eaeef2;
+            color: #636c76;
+            border: 1px solid #d0d7de;
+            opacity: 1;
+            box-shadow: 0 1px 2px rgba(27, 31, 35, 0.04);
+        }
+    }
+
+    .clear-button {
+        &:hover {
+            background-color: rgba(208, 215, 222, 0.3);
+        }
+    }
+
+    .user-card {
+        background: #ffffff;
+        border: 2px solid #0969da;
+        box-shadow: 0 4px 12px rgba(9, 105, 218, 0.1),
+            0 2px 4px rgba(9, 105, 218, 0.08);
+
+        &::before {
+            background: linear-gradient(90deg, #0969da, #2da44e, #bf3989);
+        }
+
+        &:hover {
+            border-color: #0550ae;
+            box-shadow: 0 8px 24px rgba(9, 105, 218, 0.15),
+                0 4px 8px rgba(9, 105, 218, 0.12);
+        }
+    }
+
+    .user-bio {
+        background-color: #f6f8fa;
+        border-left: 3px solid #0969da;
+        border-radius: 6px;
+    }
+
+    .user-metadata {
+        .metadata-item {
+            background-color: #f6f8fa;
+            border: 1px solid #0969da;
+
+            &:hover {
+                background-color: #ffffff;
+                border-color: #0550ae;
+                box-shadow: 0 2px 8px rgba(9, 105, 218, 0.1);
+            }
+        }
+    }
+
+    .user-stats {
+        border-top: 2px solid #0969da;
+        border-bottom: 2px solid #0969da;
+
+        .stat-item {
+            background: #ffffff;
+            border: 1px solid #0969da;
+
+            &:hover {
+                background: #f6f8fa;
+                border-color: #0550ae;
+            }
+        }
+    }
+
+    .user-join-date {
+        background-color: #f6f8fa;
+        border: 1px solid #0969da;
+    }
+
+    .repo-card {
+        background: #ffffff;
+        border: 2px solid #0969da;
+        box-shadow: 0 2px 6px rgba(9, 105, 218, 0.08);
+
+        &::before {
+            background: #0969da;
+        }
+
+        &:hover {
+            border-color: #0550ae;
+            box-shadow: 0 6px 16px rgba(9, 105, 218, 0.15),
+                0 3px 8px rgba(9, 105, 218, 0.1);
+        }
+    }
+
+    .repo-language {
+        background-color: #ddf4ff;
+        border: 1px solid #0969da;
+        color: #0550ae;
+    }
+
+    .repo-footer {
+        border-top: 1px solid #0969da;
+    }
+
+    .error-container,
+    .error-state {
+        background: #fff8f8;
+        border-color: rgba(207, 34, 46, 0.3);
+    }
+
+    .loading-spinner {
+        border-color: #d0d7de;
+        border-top-color: #0969da;
+    }
+
+    .repos-title {
+        color: #1f2328;
+    }
 }

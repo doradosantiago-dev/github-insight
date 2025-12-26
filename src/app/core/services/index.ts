@@ -3,3 +3,4 @@
  */
 
 export * from './github.service.js';
+export * from './theme.service.js';

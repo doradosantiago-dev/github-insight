@@ -1,7 +1,8 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { GithubService } from '../../core/services/github.service';
-import { LucideAngularModule, Search, Building2, MapPin, Mail, Link2, Calendar, AlertTriangle, X, Star, GitFork } from 'lucide-angular';
+import { ThemeService } from '../../core/services/theme.service';
+import { LucideAngularModule, Search, Building2, MapPin, Mail, Link2, Calendar, AlertTriangle, X, Star, GitFork, Sun, Moon } from 'lucide-angular';
 
 /**
  * Componente de búsqueda de usuarios de GitHub.
@@ -25,22 +26,35 @@ export class SearchComponent {
     readonly XIcon = X;
     readonly StarIcon = Star;
     readonly GitForkIcon = GitFork;
+    readonly SunIcon = Sun;
+    readonly MoonIcon = Moon;
 
     /**
      * Servicio de GitHub inyectado usando inject()
+     * 
      * @private
      * @readonly
      */
     private readonly githubService = inject(GithubService);
 
     /**
+     * Servicio de Tema inyectado usando inject()
+     * 
+     * @public
+     * @readonly
+     */
+    public readonly themeService = inject(ThemeService);
+
+    /**
      * Signal que almacena el valor actual del input de búsqueda
+     * 
      * @public
      */
     public searchQuery = signal<string>('');
 
     /**
      * Computed signal que expone el usuario actual desde el servicio
+     * 
      * @public
      * @readonly
      */
@@ -48,6 +62,7 @@ export class SearchComponent {
 
     /**
      * Computed signal que indica si hay una petición en curso
+     * 
      * @public
      * @readonly
      */
@@ -55,6 +70,7 @@ export class SearchComponent {
 
     /**
      * Computed signal que expone el error actual si existe
+     * 
      * @public
      * @readonly
      */
@@ -62,6 +78,7 @@ export class SearchComponent {
 
     /**
      * Computed signal que expone los repositorios del usuario
+     * 
      * @public
      * @readonly
      */
@@ -69,6 +86,7 @@ export class SearchComponent {
 
     /**
      * Computed signal que indica si se están cargando los repositorios
+     * 
      * @public
      * @readonly
      */
@@ -76,6 +94,7 @@ export class SearchComponent {
 
     /**
      * Computed signal que expone el error de carga de repositorios
+     * 
      * @public
      * @readonly
      */
@@ -83,7 +102,8 @@ export class SearchComponent {
 
     /**
      * Maneja el evento de búsqueda cuando el usuario presiona Enter.
-     * Valida que el input no esté vacío antes de realizar la búsqueda. 
+     * Valida que el input no esté vacío antes de realizar la búsqueda.
+     * 
      * @public
      */
     public onSearch(): void {
@@ -96,6 +116,7 @@ export class SearchComponent {
 
     /**
      * Limpia el input de búsqueda y resetea el estado del servicio.
+     * 
      * @public
      */
     public onClear(): void {

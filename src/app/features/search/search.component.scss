@@ -17,14 +17,21 @@
  * Sección de encabezado
  */
 .search-header {
+    position: relative;
     text-align: center;
     margin-bottom: 3.5rem;
     padding: 1rem 0;
 
+    .header-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
     .title {
         font-size: clamp(1.75rem, 4vw, 2.25rem);
         font-weight: 700;
-        color: var(--gh-text-primary);
+        color: var(--text-main);
         margin: 0 0 1rem 0;
         display: flex;
         align-items: center;
@@ -36,17 +43,67 @@
         .icon {
             width: clamp(1.5rem, 3.5vw, 2rem);
             height: clamp(1.5rem, 3.5vw, 2rem);
-            color: var(--gh-text-link);
+            color: var(--accent-color);
             filter: drop-shadow(0 2px 8px rgba(88, 166, 255, 0.3));
+            transition: color var(--transition-base), filter var(--transition-base);
         }
     }
 
     .subtitle {
         font-size: clamp(1rem, 2.5vw, 1.25rem);
-        color: var(--gh-text-secondary);
+        color: var(--text-muted);
         margin: 0;
         font-weight: 400;
         letter-spacing: -0.01em;
+    }
+}
+
+/**
+ * Botón de cambio de tema
+ */
+.theme-toggle {
+    position: absolute;
+    top: 1rem;
+    right: 0;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-secondary);
+    border: 1.5px solid var(--border-color);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    color: var(--text-main);
+
+    lucide-icon {
+        color: var(--accent-color);
+        transition: transform var(--transition-base), color var(--transition-base);
+    }
+
+    &:hover {
+        background-color: var(--bg-tertiary);
+        border-color: var(--accent-color);
+        box-shadow: var(--shadow-md);
+        transform: translateY(-2px);
+
+        lucide-icon {
+            transform: rotate(20deg) scale(1.1);
+            color: var(--accent-hover);
+        }
+    }
+
+    &:active {
+        transform: translateY(0);
+        box-shadow: var(--shadow-sm);
+    }
+
+    @media (max-width: 768px) {
+        top: 0;
+        right: 0;
+        width: 40px;
+        height: 40px;
     }
 }
 
@@ -184,9 +241,11 @@
         }
 
         &:disabled {
-            opacity: 0.5;
+            opacity: 0.6;
             cursor: not-allowed;
             background: var(--gh-bg-tertiary);
+            color: var(--gh-text-tertiary);
+            border-color: var(--gh-border);
             transform: none;
         }
 
@@ -301,9 +360,7 @@
  * Tarjeta de usuario
  */
 .user-card {
-    background: linear-gradient(135deg,
-            var(--gh-bg-secondary) 0%,
-            rgba(22, 27, 34, 0.8) 100%);
+    background: var(--gh-bg-secondary);
     border: 1.5px solid var(--gh-border);
     border-radius: 16px;
     padding: 2.5rem;
@@ -331,7 +388,7 @@
 
     &:hover {
         border-color: rgba(88, 166, 255, 0.3);
-        box-shadow: var(--gh-shadow-xl),
+        box-shadow: var(--gh-shadow-lg),
             inset 0 1px 0 rgba(255, 255, 255, 0.08),
             0 0 0 1px rgba(88, 166, 255, 0.1);
     }
@@ -363,7 +420,7 @@
         &:hover {
             transform: scale(1.05);
             border-color: var(--gh-text-link);
-            box-shadow: var(--gh-shadow-xl),
+            box-shadow: var(--gh-shadow-lg),
                 0 0 25px rgba(88, 166, 255, 0.4);
         }
     }
@@ -647,9 +704,7 @@
  * Tarjeta de repositorio
  */
 .repo-card {
-    background: linear-gradient(135deg,
-            var(--gh-bg-secondary) 0%,
-            rgba(22, 27, 34, 0.9) 100%);
+    background: var(--gh-bg-secondary);
     border: 1.5px solid var(--gh-border);
     border-radius: 12px;
     padding: 1.5rem;

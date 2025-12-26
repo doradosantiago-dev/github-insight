@@ -13,12 +13,14 @@ import { GithubUser, GithubRepo, GithubError, SearchState } from '../models';
 export class GithubService {
     /**
      * Cliente HTTP inyectado usando la función inject()
+     * 
      * @private
      */
     private readonly http = inject(HttpClient);
 
     /**
      * URL base de la API de GitHub v3
+     * 
      * @private
      * @readonly
      */
@@ -27,6 +29,7 @@ export class GithubService {
     /**
      * Signal privado que contiene el estado completo de la búsqueda.
      * No se expone directamente para mantener la encapsulación.
+     * 
      * @private
      */
     private readonly searchState = signal<SearchState<GithubUser>>({
@@ -38,6 +41,7 @@ export class GithubService {
     /**
      * Signal privado que contiene el estado de los repositorios del usuario.
      * No se expone directamente para mantener la encapsulación.
+     * 
      * @private
      */
     private readonly reposState = signal<SearchState<GithubRepo[]>>({
