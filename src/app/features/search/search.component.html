@@ -1,0 +1,141 @@
+<div class="search-container">
+    <!-- Header -->
+    <header class="search-header">
+        <h1 class="title">
+            <i-lucide [img]="SearchIcon" class="icon"></i-lucide>
+            GitHub User Search
+        </h1>
+        <p class="subtitle">Busca y explora perfiles de desarrolladores en GitHub</p>
+    </header>
+
+    <!-- Search Box -->
+    <div class="search-box">
+        <input type="text" class="search-input" placeholder="Ingresa un nombre de usuario de GitHub..."
+            [(ngModel)]="searchQuery" (keyup.enter)="onSearch()" [disabled]="isLoading()" autocomplete="off" />
+
+        @if (searchQuery().length > 0) {
+        <button class="clear-button" (click)="onClear()" type="button" aria-label="Limpiar búsqueda">
+            <i-lucide [img]="XIcon" [size]="18"></i-lucide>
+        </button>
+        }
+
+        <button class="search-button" (click)="onSearch()" [disabled]="isLoading() || searchQuery().trim().length === 0"
+            type="button">
+            @if (isLoading()) {
+            <span class="spinner"></span>
+            } @else {
+            Buscar
+            }
+        </button>
+    </div>
+
+    <!-- Loading State -->
+    @if (isLoading()) {
+    <div class="loading-state">
+        <div class="loading-spinner"></div>
+        <p class="loading-text">Buscando usuario...</p>
+    </div>
+    }
+
+    <!-- Error State -->
+    @if (error() && !isLoading()) {
+    <div class="error-state">
+        <div class="error-icon">
+            <i-lucide [img]="AlertTriangleIcon" [size]="56"></i-lucide>
+        </div>
+        <h3 class="error-title">Error</h3>
+        <p class="error-message">{{ error() }}</p>
+        <button class="retry-button" (click)="onSearch()" type="button">
+            Reintentar
+        </button>
+    </div>
+    }
+
+    <!-- Success State - User Card -->
+    @if (user() && !isLoading() && !error()) {
+    <div class="user-card">
+        <!-- Avatar Section -->
+        <div class="user-avatar-section">
+            <img [src]="user()!.avatar_url" [alt]="user()!.login + ' avatar'" class="user-avatar" />
+            <a [href]="user()!.html_url" target="_blank" rel="noopener noreferrer" class="profile-link">
+                Ver perfil en GitHub →
+            </a>
+        </div>
+
+        <!-- Info Section -->
+        <div class="user-info-section">
+            <!-- Name & Username -->
+            <div class="user-header">
+                @if (user()!.name) {
+                <h2 class="user-name">{{ user()!.name }}</h2>
+                }
+                <p class="user-login">&#64;{{ user()!.login }}</p>
+            </div>
+
+            <!-- Bio -->
+            @if (user()!.bio) {
+            <p class="user-bio">{{ user()!.bio }}</p>
+            }
+
+            <!-- Metadata Grid -->
+            <div class="user-metadata">
+                @if (user()!.company) {
+                <div class="metadata-item">
+                    <i-lucide [img]="Building2Icon" class="metadata-icon" [size]="18"></i-lucide>
+                    <span class="metadata-text">{{ user()!.company }}</span>
+                </div>
+                }
+
+                @if (user()!.location) {
+                <div class="metadata-item">
+                    <i-lucide [img]="MapPinIcon" class="metadata-icon" [size]="18"></i-lucide>
+                    <span class="metadata-text">{{ user()!.location }}</span>
+                </div>
+                }
+
+                @if (user()!.email) {
+                <div class="metadata-item">
+                    <i-lucide [img]="MailIcon" class="metadata-icon" [size]="18"></i-lucide>
+                    <a [href]="'mailto:' + user()!.email" class="metadata-link">
+                        {{ user()!.email }}
+                    </a>
+                </div>
+                }
+
+                @if (user()!.blog) {
+                <div class="metadata-item">
+                    <i-lucide [img]="Link2Icon" class="metadata-icon" [size]="18"></i-lucide>
+                    <a [href]="user()!.blog" target="_blank" rel="noopener noreferrer" class="metadata-link">
+                        {{ user()!.blog }}
+                    </a>
+                </div>
+                }
+            </div>
+
+            <!-- Stats -->
+            <div class="user-stats">
+                <div class="stat-item">
+                    <span class="stat-value">{{ user()!.public_repos }}</span>
+                    <span class="stat-label">Repositorios</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">{{ user()!.followers }}</span>
+                    <span class="stat-label">Seguidores</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">{{ user()!.following }}</span>
+                    <span class="stat-label">Siguiendo</span>
+                </div>
+            </div>
+
+            <!-- Join Date -->
+            <div class="user-join-date">
+                <i-lucide [img]="CalendarIcon" class="join-icon" [size]="18"></i-lucide>
+                <span class="join-text">
+                    Miembro desde {{ formatDate(user()!.created_at) }}
+                </span>
+            </div>
+        </div>
+    </div>
+    }
+</div>
